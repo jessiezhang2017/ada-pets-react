@@ -8,21 +8,32 @@ import speciesEmoji from '../speciesEmoji';
 
 
 const PetCard = (props) => {
+  const onClickHandler=()=>{
+    props.onSelectPetCallback(props.id)
+  }
+
+  const onCloseHandler=()=>{
+    props.onClosePetCallback(props.id)
+  }
+
   const { id, name, species, about, location } = props;
   return (
     <div className="card pet-card">
 
       <section className="pet-card--header">
 
-      { speciesEmoji(species) } {id} - {name} 
-        <button 
+      { speciesEmoji(species) } {id} - {name}
+        <button
           className="btn btn-primary pet-card--select-pet-btn"
+          // onclick={()=>{props.onSelectPetCallback(porps.id)}}
+          onClick={onClickHandler}
           >
             Select
         </button>
-        <button 
-          type="button" 
-          className="btn btn-danger pet-card--close-btn" 
+        <button
+          type="button"
+          className="btn btn-danger pet-card--close-btn"
+          onClick ={onCloseHandler}
           aria-label="Close"
         >
           Close
@@ -37,13 +48,14 @@ const PetCard = (props) => {
     </div>
   );
 };
-    
+
 PetCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired, 
-  species: PropTypes.string.isRequired, 
-  about: PropTypes.string, 
+  name: PropTypes.string.isRequired,
+  species: PropTypes.string.isRequired,
+  about: PropTypes.string,
   location: PropTypes.string,
+  onSelectPetCallback:PropTypes.function,
 }
-    
+
 export default PetCard;
